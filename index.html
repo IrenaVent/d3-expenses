@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- Compiled and minified CSS -->
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+        />
+        <title>Expenses Graph D3</title>
+        <style>
+            h2,
+            p {
+                margin: 10ps 0;
+            }
+            header {
+                margin-bottom: 40px;
+            }
+        </style>
+    </head>
+    <body class="indigo">
+        <header class="indigo darken-1 section">
+            <h2 class="center white-text">Expenses Graph D3</h2>
+            <p class="flow-text grey-text center text-lighten-2">
+                Monthly tracker for developers
+            </p>
+        </header>
+
+        <div class="container section">
+            <div class="row">
+                <div class="col s12 m6">
+                    <form class="card z-depth-0">
+                        <div class="card-content">
+                            <span class="card-title indig-text">Add Item:</span>
+                            <div class="input-field">
+                                <input type="text" id="name" />
+                                <label for="name">Item name</label>
+                            </div>
+                            <div class="input-field">
+                                <input type="text" id="cost" />
+                                <label for="name">Item cost (€)</label>
+                            </div>
+                            <div class="input-field center">
+                                <button class="btn-large pink white-text">
+                                    Add Item
+                                </button>
+                            </div>
+                            <div class="input-field center">
+                                <p class="red-text" id="error"></p>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col s12 m5 push-m1">
+                    <div class="canvas"></div>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://www.gstatic.com/firebasejs/9.4.1/firebase-app-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/9.4.1/firebase-firestore-compat.js"></script>
+        <script>
+            // Your web app's Firebase configuration
+            const firebaseConfig = {
+                apiKey: "AIzaSyBVqx-zEcf6VrheWE58ZYECK1A7263aneE",
+                authDomain: "udemy-d3-firebase-a3c9a.firebaseapp.com",
+                projectId: "udemy-d3-firebase-a3c9a",
+                storageBucket: "udemy-d3-firebase-a3c9a.appspot.com",
+                messagingSenderId: "707384054311",
+                appId: "1:707384054311:web:d317424694a03ebba0b402",
+                measurementId: "G-QZTR6BYPKS",
+            };
+
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
+            const db = firebase.firestore();
+        </script>
+        <script src="https://d3js.org/d3.v7.min.js"></script>
+        <!-- Compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <script src="index.js"></script>
+        <script src="graph.js"></script>
+    </body>
+</html>
