@@ -30,6 +30,19 @@ const legendGroup = svg
 
 const legent = d3.legendColor().shape("circle").shapePadding(10).scale(color);
 
+const tip = d3
+    .tip()
+    .attr("class", "d3-tip card") // We add the d3-tip class instead of the tip class
+    .html((event, d) => {
+        // It's (event, d) instead of just (d) in v6
+        let content = `<div class="name">${d.data.name}</div>`;
+        content += `<div class="cost">£${d.data.cost}</div>`;
+        content += `<div class="delete">Click slice to delete</div>`;
+        return content;
+    });
+
+graph.call(tip);
+
 // update data
 const update = (data) => {
     // update color scale domain
@@ -76,8 +89,14 @@ const update = (data) => {
     // add events
     graph
         .selectAll("path")
-        .on("mouseover", handleMouseOver)
-        .on("mouseout", handleMouseOut)
+        .on("mouseover", (event, d) => {
+            tip.show(event, d);
+            handleMouseOver(event, d);
+        })
+        .on("mouseout", (event, d) => {
+            tip.hide();
+            handleMouseOut(event, d);
+        })
         .on("click", handleClick);
 };
 
