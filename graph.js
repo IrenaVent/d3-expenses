@@ -169,7 +169,6 @@ const handleMouseOver = (event, d) => {
         .attr("fill", "#fff");
 };
 const handleMouseOut = (event, d) => {
-    //console.log(event.currentTarget);
     d3.select(event.currentTarget)
         .transition("changesSliceFill")
         .duration(300)
@@ -177,7 +176,6 @@ const handleMouseOut = (event, d) => {
 };
 
 const handleClick = (event, d) => {
-    // console.log(d.data.id);
     const id = d.data.id;
     db.collection("expenses").doc(id).delete();
 };
