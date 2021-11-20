@@ -72,6 +72,13 @@ const update = (data) => {
         .transition()
         .duration(750)
         .attrTween("d", arcTweenEnter);
+
+    // add events
+    graph
+        .selectAll("path")
+        .on("mouseover", handleMouseOver)
+        .on("mouseout", handleMouseOut)
+        .on("click", handleClick);
 };
 
 // take current data from db, data firestore
@@ -132,3 +139,26 @@ function arcTweenUpdate(d) {
         return arcPath(i(t));
     };
 }
+
+// event handlers
+
+const handleMouseOver = (event, d) => {
+    // console.log(event.currentTarget);
+    d3.select(event.currentTarget)
+        .transition("changesSliceFill")
+        .duration(300)
+        .attr("fill", "#fff");
+};
+const handleMouseOut = (event, d) => {
+    //console.log(event.currentTarget);
+    d3.select(event.currentTarget)
+        .transition("changesSliceFill")
+        .duration(300)
+        .attr("fill", color(d.data.name));
+};
+
+const handleClick = (event, d) => {
+    // console.log(d.data.id);
+    const id = d.data.id;
+    db.collection("expenses").doc(id).delete();
+};
