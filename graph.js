@@ -23,10 +23,21 @@ const arcPath = d3
 
 const color = d3.scaleOrdinal(d3["schemeSet2"]);
 
+// legend setup
+const legendGroup = svg
+    .append("g")
+    .attr("transform", `translate(${dims.width + 40}, 10)`);
+
+const legent = d3.legendColor().shape("circle").shapePadding(10).scale(color);
+
 // update data
 const update = (data) => {
     // update color scale domain
     color.domain(data.map((d) => d.name));
+
+    // update and call legend
+    legendGroup.call(legent);
+    legendGroup.selectAll("text").attr("fill", "white");
 
     // join enhenced (pie) data to path elements
     const paths = graph.selectAll("path").data(pie(data));
